@@ -64,6 +64,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		box-shadow: 0 0 8px #D0D0D0;
 	}
 	</style>
+
+	<link rel="stylesheet" type="text/css" href="assets/bs/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/bs/css/bootstrap-theme.min.css">
+	<script type="text/javascript" src="assets/bs/js/bootstrap.min.js" />
+	<script type="text/javascript" src="assets/bs/js/jquery.min.js"></script>
 </head>
 <body>
 
@@ -84,6 +89,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
+
+	<div class="container">
+		<button class="btn btn-primary">Login</button>
+	</div>
 
 </body>
 </html>

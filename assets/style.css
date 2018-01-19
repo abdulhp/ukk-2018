@@ -1,0 +1,11 @@
+#top-nav{
+	position: absolute;
+}
+#content{
+	position: absolute;
+	margin-top: 30px;
+	background-color: grey;
+}
+#footer{
+	margin-top: 15px;
+}
