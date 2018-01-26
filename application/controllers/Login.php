@@ -6,38 +6,58 @@ defined('BASEPATH') or exit('no direct script access');
 	*/
 	class Login extends CI_Controller
 	{
-		public function __construct() {
+		function __construct(){
 			parent::__construct();
-			// $this->load->model('crud');
+			$this->load->model('User_m');
 		}
 
-		public function index()
-		{
-			# code...
+		function index(){
 
-			if ($this->input->post('submit')) {
-				# code...
-				$username = strip_tags($this->input->post('username'));
-				$password = strip_tags(md5($this->input->post('password')));
-
-				// echo $username.", ".$password;
-				$query = $this->db->query('Select * from user where `username` = "'.$username.'";');
-
-				foreach ($query->result() as $row) {
-					# code...
-					$db_username = $row->username;
-					$db_password = $row->password;
-				}
-				
-				if ($db_username = $username && $db_password = $password) {
-					# code...
-					redirect('welcome');
-				}
-				
+			if (!isset($_SESSION['username'])) {
+				$this->load->view('vlogin');
+				// echo "False";
+			} else {
+				// echo "True";
+				redirect('welcome');
 			}
 
-			$this->load->view('user/LoginView');
 		}
 
-	}	
-	?>
+		public function action(){
+
+			if ($this->input->post('submit')) {
+				$username = strip_tags($this->input->post('username'));
+				$password = strip_tags(md5($this->input->post('password')));
+				
+				$procdata = array(
+					'username' => $username,
+					'password' => $password
+				);
+
+				$dolog = $this->User_m->cek_login('user', $procdata)->num_rows();
+
+				if($dolog > 0){
+
+					$data_session = array(
+						'username' => $username,
+						'status' => "login"
+					);
+
+					$this->session->set_userdata($data_session);
+
+					redirect(base_url("welcome"));
+
+				}else{
+					echo "Username dan password salah !";
+				}
+
+			}
+
+			
+
+		}
+		function logout(){
+				$this->session->sess_destroy();
+				redirect(base_url('login'));
+			}
+	}

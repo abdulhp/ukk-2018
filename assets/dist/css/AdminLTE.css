@@ -615,6 +615,7 @@ a:focus {
   .sidebar-mini.sidebar-collapse .main-header .logo {
     width: 50px;
   }
+  
   .sidebar-mini.sidebar-collapse .main-header .logo > .logo-mini {
     display: block;
     margin-left: -15px;

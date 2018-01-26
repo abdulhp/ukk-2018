@@ -34,7 +34,7 @@ defined('BASEPATH') or exit('no direct script access');
 				}
 			}
 
-			$this->load->view('user/RegisterForm');
+			$this->load->view('vRegister');
 		}
 
 	}	
