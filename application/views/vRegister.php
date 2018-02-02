@@ -69,7 +69,7 @@
       </div>
     </form>
 
-    <a href="<?php echo base_url('index.php/landing')?>" class="text-center">I already have a membership</a>
+    <a href="<?php echo base_url('index.php/landing')?>" class="text-center">I already have a membership, Go to login</a>
   </div>
   <!-- /.form-box -->
 </div>

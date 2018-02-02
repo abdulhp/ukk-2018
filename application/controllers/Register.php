@@ -8,32 +8,23 @@ defined('BASEPATH') or exit('no direct script access');
 	{
 		public function __construct() {
 			parent::__construct();
+			$this->load->model('User_m');
 		}
 
 		public function index()
 		{
 			# code...
+			$value = array(
+			'username' => $this->input->post('username'),
+			'fullname' => $this->input->post('fullname'),
+			'password' => md5($this->input->post('password')),
+			'level' => '5'
 
-			if ($this->input->post('submit')) {
-				# code...
-				$username = strip_tags($this->input->post('username'));
-				$password = strip_tags(md5($this->input->post('password')));
-				$fullname = strip_tags($this->input->post('fullname'));
-				$level = strip_tags($this->input->post('level'));
+		);
 
-				// var_dump($username, $password, $fullname, $level);
-
-				$query = $this->db->query("INSERT INTO `user`(`username`, `password`, `fullname`, `level`) 
-				VALUES ('$username', '$password', '$fullname', '$level')");
-
-				if ($query) {
-					# code...
-					echo "Success";
-				}else{
-					echo "Failed";
-				}
-			}
-
+		if($this->User_m->add_user($value)){
+			redirect(base_url('Login'));
+		}
 			$this->load->view('vRegister');
 		}
 

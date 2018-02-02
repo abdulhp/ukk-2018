@@ -33,13 +33,31 @@ class Welcome extends CI_Controller {
 
 	}
 
-	function delete(){
-		$id = $_GET['id'];
+	function add(){
+
+		$value = array(
+			'username' => $this->input->post('username'),
+			'fullname' => $this->input->post('fullname'),
+			'password' => md5($this->input->post('password')),
+			'level' => $this->input->post('level')
+		);
+
+		if($this->User_m->add_user($value)){
+			redirect(base_url('welcome'));
+		}
+
+	}
+
+	function delete($id){
 		$res = $this->User_m->delete_user($id);
 		if ($res) {
 			# code...
 			redirect(base_url('welcome'));
 		}
+	}
+
+	function edit($id){
+		
 	}
 
 }

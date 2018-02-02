@@ -172,6 +172,55 @@
             </div>
           </div>
 
+          <div class="box" id="EditCostumer">
+            <div class="box-header with-border">
+              <h3 class="box-title">Edit Costumer</h3>
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                  <i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body">
+              <form role="form" action="<?php echo base_url('edituser/edit');?>" method="POST">
+                <div class="box-body">
+                  <?php foreach($res as $r):?>
+                    <input type="hidden" name="id" id="id" value="<?php echo $r->id;?>">
+                    <div class="form-group">
+                      <label for="username">Username</label>
+                      <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" value="<?php echo $r->username;?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="fullname">Fullname</label>
+                      <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Enter Fullname" value="<?php echo $r->fullname;?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password" value="<?php echo $r->password;?>">
+                    </div>
+                    <div class="form-group">
+                      <label for="level">Level</label>
+                      <select id="level" class="form-control" name="level" value="<?php echo $r->value;?>">
+                        <option value="1">Owner</option>
+                        <option value="2">Administrator</option>
+                        <option value="3">Helper</option>
+                        <option value="4">Operator</option>
+                        <option value="5">User</option>
+                      </select>
+                    </div>
+                  <?php endforeach;?>
+                </div>
+                <div class="box-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
           <div class="box collapse" id="InputCostumer">
             <div class="box-header with-border">
               <h3 class="box-title">Input Costumer</h3>
@@ -248,7 +297,7 @@
                     <td><?php echo $usr->username; ?></td>
                     <td><?php echo $usr->fullname; ?></td>
                     <td><?php echo $usr->level; ?></td>
-                    <td><a href="<?php echo base_url();?>edituser/index/<?php echo $usr->id;?>" class="btn btn-default">edit</a><a href="<?php echo base_url();?>welcome/delete/<?php echo $usr->id;?>" class="btn btn-default" onclick="return">delete</a></td>
+                    <td><a href="<?php echo base_url();?>welcome/edit/<?php echo $usr->id;?>" class="btn btn-default">edit</a><a href="<?php echo base_url();?>welcome/delete/<?php echo $usr->id;?>" class="btn btn-default" onclick="return">delete</a></td>
                   </tr>
                   <?php } ?>
                 </tbody>
