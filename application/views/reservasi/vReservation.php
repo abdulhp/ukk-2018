@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/Ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
@@ -208,37 +210,66 @@
       <section class="content">
 
         <!-- list user -->
-        <div class="box " id="EditUser">
+        <div class="box " id="InputReservasi">
           <div class="box-header with-border">
-            <h3 class="box-title">Edit User</h3>
+            <h3 class="box-title">Reservasi</h3>
           </div>
           <div class="box-body">
-            <form role="form" action="<?php echo base_url('edituser/edit');?>" method="POST">
-              <?php foreach($res as $r):?>
-                <input type="hidden" name="id" id="id" value="<?php echo $r->id;?>">
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" value="<?php echo $r->username;?>">
-                </div>
-                <div class="form-group">
-                  <label for="fullname">Fullname</label>
-                  <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Enter Fullname" value="<?php echo $r->fullname;?>">
-                </div>
-                <div class="form-group">
-                  <label for="level">Level</label>
-                  <select id="level" class="form-control" name="level">
-                    <option value="1" <?php if($r->level == 1){echo 'selected="selected"';}?>>Owner</option>
-                    <option value="2" <?php if($r->level == 2){echo 'selected="selected"';}?>>Administrator</option>
-                    <option value="3" <?php if($r->level == 3){echo 'selected="selected"';}?>>Helper</option>
-                    <option value="4" <?php if($r->level == 4){echo 'selected="selected"';}?>>Operator</option>
-                    <option value="5" <?php if($r->level == 5){echo 'selected="selected"';}?>>User</option>
-                  </select>
-                </div>
-              <?php endforeach;?>
-            </div>
-            <div class="box-footer">
-              <input type="submit" class="btn btn-primary"></button>
-            </form>
+           <table id="example1" class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Reservation Code</th>
+                <th>Reservation At</th>
+                <th>Reservation Date</th>
+                <th>Seat Code</th>
+                <th>Customer Id</th>
+                <th>Rute Id</th>
+                <th>Depart At</th>
+                <th>Price</th>
+                <th>User_id</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($reservasi as $usr): ?>
+                <tr>
+                  <td><?php echo $usr->id; ?></td>
+                  <td><?php echo $usr->reservation_code; ?></td>
+                  <td><?php echo $usr->reservation_at; ?></td>
+                  <td><?php echo $usr->reservation_date; ?></td>
+                  <td><?php echo $usr->seat_code; ?></td>
+                  <td><?php echo $usr->customer_id; ?></td>
+                  <td><?php echo $usr->rute_id; ?></td>
+                  <td><?php echo $usr->depart_at; ?></td>
+                  <td><?php echo $usr->price; ?></td>
+                  <td><?php echo $usr->user_id; ?></td>
+                  <td>
+                    <a href="<?php echo base_url();?>reservation/edit/<?php echo $usr->id;?>" class="btn btn-info">
+                      <span class="fa fa-edit"></span> Edit
+                    </a> 
+                    <a href="<?php echo base_url();?>reservation/delete/<?php echo $usr->id;?>" class="btn btn-danger">
+                      <span class="fa fa-remove"></span> Delete
+                    </a></td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>Id</th>
+                  <th>Reservation Code</th>
+                  <th>Reservation At</th>
+                  <th>Reservation Date</th>
+                  <th>Seat Code</th>
+                  <th>Customer Id</th>
+                  <th>Rute Id</th>
+                  <th>Depart At</th>
+                  <th>Price</th>
+                  <th>User_id</th>
+                  <th>Action</th>
+                </tr>
+              </tfoot>
+            </table>
           </div>
         </div>
         <!-- /list user -->
@@ -264,12 +295,20 @@
 <script src="<?php echo base_url();?>assets/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/fastclick/lib/fastclick.js"></script>
 <script src="<?php echo base_url();?>assets/dist/js/adminlte.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()
   })
+</script>
+<script>
+ $(function () {
+  $('#example1').DataTable()
+})
 </script>
 <!-- /load script -->
 

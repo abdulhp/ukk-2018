@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -130,7 +131,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li class="active"><a><i class="fa fa-user"></i> List User <span class="badge pull-right-container"><?php echo $this->db->get('user')->num_rows();?></span></a></li>
+              <li><a href="<?php echo base_url('listuser');?>"><i class="fa fa-user"></i> List User <span class="badge pull-right-container"><?php echo $this->db->get('user')->num_rows();?></span></a></li>
               <li><a href="<?php echo base_url('inputuser');?>"><i class="fa fa-user-plus"></i> Input User</a></li>
             </ul>
           </li>
@@ -198,9 +199,7 @@
           <small>Welcome, <?php echo $this->session->userdata('username');?></small>
         </h1>
         <ol class="breadcrumb">
-          <li><a href="<?php echo base_url();?>"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="active"><a><i class="fa fa-user"></i> User</a></li>
-          <li class="active"><a><i class="fa fa-edit"></i> Edit</a></li>
+          <li class="active"><a><i class="fa fa-dashboard"></i> Home</a></li>
         </ol>
       </section>
 
@@ -208,37 +207,14 @@
       <section class="content">
 
         <!-- list user -->
-        <div class="box " id="EditUser">
+        <div class="box " id="welcomeuser">
           <div class="box-header with-border">
-            <h3 class="box-title">Edit User</h3>
+            <h3 class="box-title">Welcome to <b><i>A</i>IR</b>Transport <i class="fa fa-plane"></i></h3>
           </div>
           <div class="box-body">
-            <form role="form" action="<?php echo base_url('edituser/edit');?>" method="POST">
-              <?php foreach($res as $r):?>
-                <input type="hidden" name="id" id="id" value="<?php echo $r->id;?>">
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" value="<?php echo $r->username;?>">
-                </div>
-                <div class="form-group">
-                  <label for="fullname">Fullname</label>
-                  <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Enter Fullname" value="<?php echo $r->fullname;?>">
-                </div>
-                <div class="form-group">
-                  <label for="level">Level</label>
-                  <select id="level" class="form-control" name="level">
-                    <option value="1" <?php if($r->level == 1){echo 'selected="selected"';}?>>Owner</option>
-                    <option value="2" <?php if($r->level == 2){echo 'selected="selected"';}?>>Administrator</option>
-                    <option value="3" <?php if($r->level == 3){echo 'selected="selected"';}?>>Helper</option>
-                    <option value="4" <?php if($r->level == 4){echo 'selected="selected"';}?>>Operator</option>
-                    <option value="5" <?php if($r->level == 5){echo 'selected="selected"';}?>>User</option>
-                  </select>
-                </div>
-              <?php endforeach;?>
-            </div>
-            <div class="box-footer">
-              <input type="submit" class="btn btn-primary"></button>
-            </form>
+           <p>
+             Hello
+           </p>
           </div>
         </div>
         <!-- /list user -->
@@ -266,9 +242,16 @@
 <script src="<?php echo base_url();?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/fastclick/lib/fastclick.js"></script>
 <script src="<?php echo base_url();?>assets/dist/js/adminlte.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()
+  })
+</script>
+<script>
+  $(function () {
+    $('#example1').DataTable()
   })
 </script>
 <!-- /load script -->

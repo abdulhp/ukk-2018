@@ -9,8 +9,14 @@
   <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/Ionicons/css/ionicons.min.css">
+
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/select2/dist/css/select2.min.css">
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/iCheck/all.css">
+
   <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
@@ -208,38 +214,68 @@
       <section class="content">
 
         <!-- list user -->
-        <div class="box " id="EditUser">
+        <div class="box " id="InputReservasi">
           <div class="box-header with-border">
-            <h3 class="box-title">Edit User</h3>
+            <h3 class="box-title">Input Reservasi</h3>
           </div>
           <div class="box-body">
-            <form role="form" action="<?php echo base_url('edituser/edit');?>" method="POST">
-              <?php foreach($res as $r):?>
-                <input type="hidden" name="id" id="id" value="<?php echo $r->id;?>">
-                <div class="form-group">
-                  <label for="username">Username</label>
-                  <input type="text" class="form-control" name="username" id="username" placeholder="Enter username" value="<?php echo $r->username;?>">
+            <form action="<?php echo base_url('reservation/procadd');?>" method="POST">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter Name">
+              </div>
+              <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" name="address" placeholder="Enter Address">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" class="form-control" name="phone" placeholder="Enter Phone Number">
+              </div>
+              <div class="form-group">
+                <label for="gender">Gender</label>
+                <div class="radio">
+                  <label><input type="radio" name="gender" class="flat-red" value="1"> Men</label>
+                  <label><input type="radio" name="gender" class="flat-red" value="0"> Women</label>
                 </div>
-                <div class="form-group">
-                  <label for="fullname">Fullname</label>
-                  <input type="text" class="form-control" name="fullname" id="fullname" placeholder="Enter Fullname" value="<?php echo $r->fullname;?>">
-                </div>
-                <div class="form-group">
-                  <label for="level">Level</label>
-                  <select id="level" class="form-control" name="level">
-                    <option value="1" <?php if($r->level == 1){echo 'selected="selected"';}?>>Owner</option>
-                    <option value="2" <?php if($r->level == 2){echo 'selected="selected"';}?>>Administrator</option>
-                    <option value="3" <?php if($r->level == 3){echo 'selected="selected"';}?>>Helper</option>
-                    <option value="4" <?php if($r->level == 4){echo 'selected="selected"';}?>>Operator</option>
-                    <option value="5" <?php if($r->level == 5){echo 'selected="selected"';}?>>User</option>
-                  </select>
-                </div>
-              <?php endforeach;?>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" placeholder="Enter Email">
+              </div>
+              <div class="form-group">
+                <label for="reservdate">Reservation Date</label>
+                <input type="text" class="form-control" name="reservdate" id="datepicker" placeholder="Enter Date">
+              </div>
+              <div class="form-group">
+                <label for="rute">Rute</label>
+                <select name="rute" class="form-control select2">
+                  <?php foreach($rute as $rute): ?>
+                    <option value="<?php echo $rute->id; ?>"><?php echo $rute->rute_from; ?>, <?php echo $rute->rute_to; ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="seat">Seat</label>
+                <select name="seat" class="form-control select2">
+                  <?php 
+                  $no=0;
+                  for ($i=0; $i < 100; $i++) { 
+                    # code...
+                    $no++
+                    ?>
+                    <option value="A<?php echo $no; ?>">A<?php echo $no; ?></option>
+                    <?php 
+                  } 
+                  ?>
+                </select>
+              </div>
+
             </div>
             <div class="box-footer">
-              <input type="submit" class="btn btn-primary"></button>
-            </form>
-          </div>
+              <input type="submit" name="submit" class="btn btn-primary" value="Submit">
+            </div>
+          </form>
         </div>
         <!-- /list user -->
 
@@ -264,12 +300,28 @@
 <script src="<?php echo base_url();?>assets/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+
+<script src="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script src="<?php echo base_url();?>assets/plugins/iCheck/icheck.min.js"></script>
+
 <script src="<?php echo base_url();?>assets/bower_components/fastclick/lib/fastclick.js"></script>
 <script src="<?php echo base_url();?>assets/dist/js/adminlte.min.js"></script>
+<script src="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()
   })
+</script>
+<script>
+ $(function () {
+  $('#datepicker').datepicker({autoclose: true, format: 'yyyy/mm/dd'})
+  $('.select2').select2()
+  $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+    checkboxClass: 'icheckbox_flat-green',
+    radioClass   : 'iradio_flat-green'
+  })
+})
 </script>
 <!-- /load script -->
 

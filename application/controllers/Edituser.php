@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('no direct script access');
 /**
 * 
 */
-class Edituser extends CI_Controller
+class EditUser extends CI_Controller
 {
 	
 	function __construct()
@@ -17,10 +17,10 @@ class Edituser extends CI_Controller
 	function index($id){
 		$data = new stdClass();
 		$data->res = $this->User_m->get_user_by_id($id)->result();
-		$this->load->view('vedituser', $data);
+		$this->load->view('vEditUser', $data);
 	}
 
-	function edit($id){
+	function edit(){
 		$id = $this->input->post('id');
 		$username = $this->input->post('username');
 		$password = md5($this->input->post('password'));
@@ -39,9 +39,9 @@ class Edituser extends CI_Controller
 
 		if ($result==1) {
 			# code...
-			redirect('welcome','refresh');
+			redirect('listuser');
 		}else{
-			echo "Error";
+			Echo "Error";
 		}
 
 	}

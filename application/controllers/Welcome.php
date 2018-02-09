@@ -22,6 +22,7 @@ class Welcome extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('User_m');
+		$this->load->model('Reserve_m');
 	}
 	public function index()
 	{
@@ -29,7 +30,11 @@ class Welcome extends CI_Controller {
 		$data = new stdClass();
 
 		$data->users = $this->User_m->gets();
+		$data->reservasi = $this->Reserve_m->gets();
+
 		$this->load->view('landing', $data);
+
+		
 
 	}
 
