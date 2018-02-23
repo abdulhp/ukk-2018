@@ -13,7 +13,7 @@ class Reservation extends CI_Controller{
 		$data = new stdClass();
 		$data->reservasi = $this->Reserve_m->gets();
 		$this->load->view('reservasi/vReservation', $data);
-	}
+	} 
 
 	function add(){
 		$data = new stdClass();

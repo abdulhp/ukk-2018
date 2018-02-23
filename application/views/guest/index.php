@@ -8,8 +8,9 @@
 
   <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/Ionicons/css/ionicons.min.css">
-  <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  
+  <link rel="stylesheet" href="<?php echo base_url();?>assets/bower_components/select2/dist/css/select2.min.css">
+
   <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/skins/_all-skins.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -116,7 +117,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="<?php echo base_url('homepage/reservation') ?>"><i class="fa fa-calendar-check-o"></i> Flight Check  <span class="badge pull-right-container"><?php echo $this->db->get('reservation')->num_rows();?></span></a></li>
+              <li><a data-toggle="collapse" data-target="#CheckReservation"><i class="fa fa-calendar-check-o"></i> Flight Check  <span class="badge pull-right-container"><?php echo $this->db->get('reservation')->num_rows();?></span></a></li>
               <li><a data-toggle="collapse" data-target="#FlightReservation"><i class="fa fa-book"></i> Flight Reservation</a></li>
             </ul>
           </li>
@@ -131,7 +132,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li class="active"><a><i class="fa fa-user"></i> List User <span class="badge pull-right-container"><?php echo $this->db->get('user')->num_rows();?></span></a></li>
+              <li><a href="<?php echo base_url('listuser');?>"><i class="fa fa-user"></i> List User <span class="badge pull-right-container"><?php echo $this->db->get('user')->num_rows();?></span></a></li>
               <li><a href="<?php echo base_url('inputuser');?>"><i class="fa fa-user-plus"></i> Input User</a></li>
             </ul>
           </li>
@@ -199,8 +200,7 @@
           <small>Welcome, <?php echo $this->session->userdata('username');?></small>
         </h1>
         <ol class="breadcrumb">
-          <li><a href="<?php echo base_url();?>"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="active"><a><i class="fa fa-user"></i> User</a></li>
+          <li class="active"><a><i class="fa fa-dashboard"></i> Home</a></li>
         </ol>
       </section>
 
@@ -208,48 +208,37 @@
       <section class="content">
 
         <!-- list user -->
-        <div class="box " id="ListUser">
+        <div class="box " id="welcomeuser">
           <div class="box-header with-border">
-            <h3 class="box-title">List User</h3>
+            <h3 class="box-title">Welcome to <b><i>A</i>IR</b>Transport <i class="fa fa-plane"></i></h3>
           </div>
           <div class="box-body">
-            <table id="example1" class="table table-bordered table-striped table-hover">
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Username</th>
-                  <th>Fullname</th>
-                  <th>Level</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach($users as $usr): ?>
-                  <tr>
-                    <td><?php echo $usr->id; ?></td>
-                    <td><?php echo $usr->username; ?></td>
-                    <td><?php echo $usr->fullname; ?></td>
-                    <td><?php echo $usr->level; ?></td>
-                    <td>
-                      <a href="<?php echo base_url();?>edituser/index/<?php echo $usr->id;?>" class="btn btn-info">
-                        <span class="fa fa-edit"></span> Edit
-                      </a> 
-                      <a href="<?php echo base_url();?>welcome/delete/<?php echo $usr->id;?>" class="btn btn-danger">
-                        <span class="fa fa-remove"></span> Delete
-                      </a></td>
-                  </tr>
-                <?php endforeach; ?>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Id</th>
-                  <th>Username</th>
-                  <th>Fullname</th>
-                  <th>Level</th>
-                  <th>Action</th>
-                </tr>
-              </tfoot>
-            </table>
+           <div class="row">
+             <div class="col-md-6">
+               <form action="<?php echo base_url('guest/search');?>" method="POST">
+                <?php foreach($rute as $r) ?>
+                 <div class="form-group">
+                   <label for="from">From</label>
+                   <select name="from" class="form-control select2">
+                      <option value="<?php echo $r->rute_from; ?>"><?php echo $r->rute_from; ?></option>
+                   </select>
+                 </div>
+                 <div class="form-group">
+                   <label for="to">To</label>
+                   <select name="to" class="form-control select2">
+                      <option value="<?php echo $r->rute_to; ?>"><?php echo $r->rute_to; ?></option>
+                   </select>
+                 </div>
+                 <!-- <div class="form-group">
+                   <label for="departdate">Departure</label>
+                   <input type="text" class="form-control" name="departdate" id="datepicker">
+                 </div> -->
+                 <div class="form-group">
+                   <input type="submit" class="form-control btn btn-primary" value="Submit">
+                 </div>
+               </form>
+             </div>
+           </div>
           </div>
         </div>
         <!-- /list user -->
@@ -277,8 +266,9 @@
 <script src="<?php echo base_url();?>assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="<?php echo base_url();?>assets/bower_components/fastclick/lib/fastclick.js"></script>
 <script src="<?php echo base_url();?>assets/dist/js/adminlte.min.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+<script src="<?php echo base_url();?>assets/bower_components/select2/dist/js/select2.full.min.js"></script>
+
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()
@@ -286,7 +276,7 @@
 </script>
 <script>
   $(function () {
-    $('#example1').DataTable()
+    $('.select2').select2()
   })
 </script>
 <!-- /load script -->

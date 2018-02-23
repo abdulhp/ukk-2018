@@ -5,7 +5,7 @@
 class Reserve_m extends CI_Model
 {
 	function gets(){
-		return $this->db->get('Reservation')->result();
+		return $this->db->get('Reservation');
 	}
 
 	function get_by_id($id){

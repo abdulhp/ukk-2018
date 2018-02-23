@@ -307,7 +307,6 @@
 
 <script src="<?php echo base_url();?>assets/bower_components/fastclick/lib/fastclick.js"></script>
 <script src="<?php echo base_url();?>assets/dist/js/adminlte.min.js"></script>
-<script src="<?php echo base_url();?>assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()

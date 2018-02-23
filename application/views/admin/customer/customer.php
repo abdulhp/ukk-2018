@@ -116,7 +116,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="<?php echo base_url('homepage/reservation') ?>"><i class="fa fa-calendar-check-o"></i> Flight Check  <span class="badge pull-right-container"><?php echo $this->db->get('reservation')->num_rows();?></span></a></li>
+              <li><a href="<?php echo base_url('homepage/Reservation'); ?>"><i class="fa fa-calendar-check-o"></i> List Reservation  <span class="badge pull-right-container"><?php echo $this->db->get('reservation')->num_rows();?></span></a></li>
               <li><a data-toggle="collapse" data-target="#FlightReservation"><i class="fa fa-book"></i> Flight Reservation</a></li>
             </ul>
           </li>
@@ -131,7 +131,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li class="active"><a><i class="fa fa-user"></i> List User <span class="badge pull-right-container"><?php echo $this->db->get('user')->num_rows();?></span></a></li>
+              <li><a href="<?php echo base_url('listuser') ?>"><i class="fa fa-user"></i> List User <span class="badge pull-right-container"><?php echo $this->db->get('user')->num_rows();?></span></a></li>
               <li><a href="<?php echo base_url('inputuser');?>"><i class="fa fa-user-plus"></i> Input User</a></li>
             </ul>
           </li>
@@ -146,7 +146,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a data-toggle="collapse" data-target="#ListCustomer"><i class="fa fa-user"></i> List Customer <span class="badge pull-right-container"><?php echo $this->db->get('customer')->num_rows();?></span></a></li>
+              <li class="active"><a><i class="fa fa-user"></i> List Customer <span class="badge pull-right-container"><?php echo $this->db->get('customer')->num_rows();?></span></a></li>
               <li><a data-toggle="collapse" data-target="#InputCustomer"><i class="fa fa-user-plus"></i> Input Customer</a></li>
             </ul>
           </li>
@@ -217,38 +217,33 @@
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Username</th>
-                  <th>Fullname</th>
-                  <th>Level</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Phone</th>
+                  <th>Gender</th>
+                  <th>Email</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <?php foreach($users as $usr): ?>
+                <?php foreach($listcustomer as $row): ?>
                   <tr>
-                    <td><?php echo $usr->id; ?></td>
-                    <td><?php echo $usr->username; ?></td>
-                    <td><?php echo $usr->fullname; ?></td>
-                    <td><?php echo $usr->level; ?></td>
+                    <td><?php echo $row->id; ?></td>
+                    <td><?php echo $row->name; ?></td>
+                    <td><?php echo $row->address; ?></td>
+                    <td><?php echo $row->phone; ?></td>
+                    <td><?php echo $row->gender; ?></td>
+                    <td><?php echo $row->email; ?></td>
                     <td>
-                      <a href="<?php echo base_url();?>edituser/index/<?php echo $usr->id;?>" class="btn btn-info">
+                      <a href="<?php echo base_url();?>edituser/index/<?php echo $row->id;?>" class="btn btn-info">
                         <span class="fa fa-edit"></span> Edit
                       </a> 
-                      <a href="<?php echo base_url();?>welcome/delete/<?php echo $usr->id;?>" class="btn btn-danger">
+                      <a href="<?php echo base_url();?>welcome/delete/<?php echo $row->id;?>" class="btn btn-danger">
                         <span class="fa fa-remove"></span> Delete
                       </a></td>
                   </tr>
                 <?php endforeach; ?>
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>Id</th>
-                  <th>Username</th>
-                  <th>Fullname</th>
-                  <th>Level</th>
-                  <th>Action</th>
-                </tr>
-              </tfoot>
             </table>
           </div>
         </div>
